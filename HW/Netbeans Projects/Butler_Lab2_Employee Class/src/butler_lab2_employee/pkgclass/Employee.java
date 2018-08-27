@@ -30,34 +30,28 @@ public class Employee {
         this.Position = "";
     }
 
+    //Mutator Methods
     public String getName() {
         return Name;
     }
-
     public void setName(String Name) {
         this.Name = Name;
     }
-
     public int getIdNumber() {
         return idNumber;
     }
-
     public void setIdNumber(int idNumber) {
         this.idNumber = idNumber;
     }
-
     public String getDepartment() {
         return Department;
     }
-
     public void setDepartment(String Department) {
         this.Department = Department;
     }
-
     public String getPosition() {
         return Position;
     }
-
     public void setPosition(String Position) {
         this.Position = Position;
     }
