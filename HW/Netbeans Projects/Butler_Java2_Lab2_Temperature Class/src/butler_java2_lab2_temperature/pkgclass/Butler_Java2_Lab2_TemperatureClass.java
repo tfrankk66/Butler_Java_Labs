@@ -14,7 +14,7 @@ public class Butler_Java2_Lab2_TemperatureClass {
         DecimalFormat df = new DecimalFormat("###.####");
         Temperature t = new Temperature(temp);
         
-        System.out.println("Converting Farenheit Temprature....");
+        System.out.println("Converting Farenheit Temprature...");
         System.out.println("Farenheit Temperature: °" + df.format(t.getFarenheit()));
         System.out.println("Converted Celsius Temperature: °" + df.format(t.getCelsius()));
         System.out.println("Converted Kelvin Temperature: °" + df.format(t.getKelvin()));
