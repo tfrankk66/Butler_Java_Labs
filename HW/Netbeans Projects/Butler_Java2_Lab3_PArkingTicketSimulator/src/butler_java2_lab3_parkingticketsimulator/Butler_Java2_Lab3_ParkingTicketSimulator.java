@@ -1,5 +1,4 @@
 package butler_java2_lab3_parkingticketsimulator;
-import java.text.DecimalFormat;
 
 public class Butler_Java2_Lab3_ParkingTicketSimulator {
 
