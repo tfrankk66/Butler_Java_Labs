@@ -5,11 +5,11 @@ public class ParkedCar {
     private String make;
     private String model;
     private String color;
-    private int lNum;
+    private String lNum;
     private double pMin;
     
     //Argument Constructor
-    public ParkedCar(String make, String model, String color, int lNum, double pMin){
+    public ParkedCar(String make, String model, String color, String lNum, double pMin){
         this.make = make;
         this.model = model;
         this.color = color;
@@ -44,10 +44,10 @@ public class ParkedCar {
     public void setColor(String color) {
         this.color = color;
     }
-    public int getlNum() {
+    public String getlNum() {
         return lNum;
     }
-    public void setlNum(int lNum) {
+    public void setlNum(String lNum) {
         this.lNum = lNum;
     }
     public double getpMin() {

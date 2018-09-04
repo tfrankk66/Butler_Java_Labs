@@ -8,7 +8,7 @@ public class Butler_Java2_Lab3_CarpetCalculator_Main {
         //Initialization
         Scanner input = new Scanner(System.in);
         RoomDimension rDim = new RoomDimension();
-        DecimalFormat df = new DecimalFormat("######.##");
+        DecimalFormat df = new DecimalFormat("#######.##");
         
         //User Input
         System.out.println("Hello and welcome to the Carpet Calculator Program!");
