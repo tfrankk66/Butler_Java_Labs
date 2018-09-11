@@ -1,6 +1,6 @@
-package butler_java2_lab3_passwordverifier;
+package butler_java2_lab4_passwordverifier;
 import java.util.Scanner;
-public class Butler_Java2_Lab3_PasswordVerifier {
+public class Butler_Java2_Lab4_PasswordVerifier {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);

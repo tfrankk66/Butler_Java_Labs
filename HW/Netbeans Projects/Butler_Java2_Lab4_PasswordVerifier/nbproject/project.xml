@@ -3,7 +3,7 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
-            <name>Butler_Java2_Lab3_PasswordVerifier</name>
+            <name>Butler_Java2_Lab4_PasswordVerifier</name>
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>
