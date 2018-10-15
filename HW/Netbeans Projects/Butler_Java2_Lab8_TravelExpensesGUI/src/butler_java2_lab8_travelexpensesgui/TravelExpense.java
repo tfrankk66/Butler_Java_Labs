@@ -1,7 +1,9 @@
 package butler_java2_lab8_travelexpensesgui;
 
-import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.text.DecimalFormat;
 
 public class TravelExpense extends JFrame{
     
@@ -26,8 +28,8 @@ public class TravelExpense extends JFrame{
     private JTextField registrationFeesText;
     private JTextField lodgingChargesText;
     
-    private JButton reset;
     private JButton calc;
+    DecimalFormat df = new DecimalFormat("####.##");
     
     private double mealReimburse = 37;
     private double parkingReimburse = 10;
@@ -46,8 +48,10 @@ public class TravelExpense extends JFrame{
         setLocationRelativeTo(null);
        
         buildTravelPanel();
+        buildCalcButtonPanel();
         
         add(travelPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
         
         pack();
         setVisible(true);
@@ -99,6 +103,76 @@ public class TravelExpense extends JFrame{
         travelPanel.add(registrationFeesText);
         travelPanel.add(lodgingCharges);
         travelPanel.add(lodgingChargesText);
+    }
+    
+    public void buildCalcButtonPanel(){
+        calc = new JButton("Calculate");
+        calc.addActionListener(new CalculateButtonListener());
+        
+        
+        buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(1,1));
+        
+        buttonPanel.add(calc);
+        
+    }
+    
+    private class CalculateButtonListener implements ActionListener{
+        String input1;
+        String input2;
+        String input3;
+        String input4;
+        String input5;
+        String input6;
+        String input7;
+        String input8;
+        
+        double numDay;
+        double airfare;
+        double carFees;
+        double milesDriven;
+        double parkingFees;
+        double taxiCharges;
+        double registrationFees;
+        double lodgingFees;
+        double totalExpense;
+        double allowExpense;
+        double excess;
+        double savedAmount;
+        
+        @Override
+        public void actionPerformed(ActionEvent e){
+            input1 = daysOnTripText.getText();
+            input2 = airfareText.getText();
+            input3 = carRentalText.getText();
+            input4 = milesDrivenText.getText();
+            input5 = parkingFeesText.getText();
+            input6 = taxiChargesText.getText();
+            input7 = registrationFeesText.getText();
+            input8 = lodgingChargesText.getText();
+            
+            numDay = Double.parseDouble(input1);
+            airfare = Double.parseDouble(input2);
+            carFees = Double.parseDouble(input3);
+            milesDriven = Double.parseDouble(input4);
+            parkingFees = Double.parseDouble(input5);
+            taxiCharges = Double.parseDouble(input6);
+            registrationFees = Double.parseDouble(input7);
+            lodgingFees = Double.parseDouble(input8);
+            
+            totalExpense = airfare + carFees + (milesDriven * privateReimburse) + parkingFees + taxiCharges + registrationFees + lodgingFees;
+            allowExpense = (mealReimburse * numDay) + (parkingReimburse * numDay) + (taxiReimburse * numDay) + (lodgingReimburse * numDay) + (milesDriven * privateReimburse);
+            excess = totalExpense - allowExpense;
+            if(excess < 0){
+                excess = 0;
+            }
+            savedAmount = totalExpense - excess;
+            
+            JOptionPane.showMessageDialog(null, "Total Expenses incurre by business person:   $" + df.format(totalExpense) + 
+                                                "\nTotal Allowable Expenses:   $" + df.format(allowExpense) +
+                                                "\nExcess amount to be paid:   $" + df.format(excess) +
+                                                "\nAmount saved by business person:   $" + df.format(savedAmount));
+        }
     }
     
 }
