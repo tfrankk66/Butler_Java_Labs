@@ -34,6 +34,7 @@ public class Butler_Java2_Lab10_Checkerboard extends Application {
             for (int i = 0; i < n; i++){
                 for (int j = 0; j < n; j++){
                     TextField[i][j] = new TextField("" + i + "," + j);
+                    TextField[i][j].setPrefSize(50, 50);
                     gridPane.add(TextField[i][j], i, j);
                 }
             }
