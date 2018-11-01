@@ -18,6 +18,8 @@ public class Butler_Java2_Lab10_ColorChangingRadioButtons extends Application {
     @Override
     public void start(Stage primaryStage) {
         
+        ToggleGroup tg = new ToggleGroup();
+        
         HBox h = new HBox(30);
         h.setPadding(new Insets(10, 10, 10, 10));
         h.setAlignment(Pos.CENTER);
@@ -35,6 +37,8 @@ public class Butler_Java2_Lab10_ColorChangingRadioButtons extends Application {
         };
         rb1.setOnAction(handler);
         rb2.setOnAction(handler);
+        rb1.setToggleGroup(tg);
+        rb2.setToggleGroup(tg);
         
         h.getChildren().addAll(rb1, rb2);
         
