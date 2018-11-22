@@ -3,6 +3,7 @@ package butler_java2_finalproject;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.image.ImageView;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -32,9 +33,18 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
        TextField tf3 = new TextField();
        TextField tf4 = new TextField();
        
+       //Initialize Button Object
+       Button assignB = new Button("Assign Films");
+       
+       //Intialize Pane Elements
        BorderPane bPane = new BorderPane();
        GridPane gPane1 = new GridPane();
-       Button assignB = new Button("Assign Films");
+       GridPane gPane2 = new GridPane();
+       VBox vb1 = new VBox();
+       VBox vb2 = new VBox();
+       VBox vb3 = new VBox();
+       VBox vb4 = new VBox();
+       
        Scene scene = new Scene(bPane, 350, 200);
        
        //Check for Serialized Object Data, If Found Deserialize
@@ -55,7 +65,7 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
            }
            System.out.println("Serializing Data.");
            
-           buildTheaterMainPanel(t1, t2, t3, t4);
+           buildTheaterMainPanel(gPane2, t1, t2, t3, t4, vb1, vb2, vb3, vb4, bPane);
        }
        else
        {
@@ -96,7 +106,7 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
                Theater t3 = new Theater(tf1.getText());
                Theater t4 = new Theater(tf1.getText());
                
-               buildTheaterMainPanel(t1, t2, t3, t4);
+               buildTheaterMainPanel(gPane2, t1, t2, t3, t4, vb1, vb2, vb3, vb4, bPane);
            }
        });
        
@@ -115,7 +125,17 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
         gPane1.setAlignment(Pos.CENTER);
     }
     
-    public static void buildTheaterMainPanel(Theater t1, Theater t2, Theater t3, Theater t4){
+    public static void buildTheaterMainPanel(GridPane gPane2, Theater t1, Theater t2, Theater t3, Theater t4, VBox vb1, VBox vb2, VBox vb3, VBox vb4, BorderPane bPane){
+        Button b1 = new Button("Current Status");
+        Button b2 = new Button("Viewer Total");
         
+        
+        
+        vb1.getChildren().addAll(b1, b2);
+        
+        
+        bPane.setLeft(vb1);
+        bPane.setTop(null);
+        bPane.setCenter(null);
     }
 }
