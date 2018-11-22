@@ -4,10 +4,11 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.io.*;
+import javafx.geometry.Pos;
 import javafx.stage.WindowEvent;
 
 /**
@@ -16,15 +17,25 @@ import javafx.stage.WindowEvent;
  */
 public class Butler_Java2_FinalProject extends Application implements Serializable {
     //Declare Theater Objects
-    Theater t1 = null;
-    Theater t2 = null;
-    Theater t3 = null;
-    Theater t4 = null;
+    private Theater t1 = null;
+    private Theater t2 = null;
+    private Theater t3 = null;
+    private Theater t4 = null;
+    
+   
     
     @Override
     public void start(Stage primaryStage) {
+       //Initialize TextField Elements
+       TextField tf1 = new TextField();
+       TextField tf2 = new TextField();
+       TextField tf3 = new TextField();
+       TextField tf4 = new TextField();
+       
        BorderPane bPane = new BorderPane();
-       Scene scene = new Scene(bPane);
+       GridPane gPane1 = new GridPane();
+       Button assignB = new Button("Assign Films");
+       Scene scene = new Scene(bPane, 350, 200);
        
        //Check for Serialized Object Data, If Found Deserialize
        if(new File("Objects.txt").isFile()){
@@ -43,20 +54,25 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
                System.out.println("Class Not Found");
            }
            System.out.println("Serializing Data.");
+           
+           buildTheaterMainPanel(t1, t2, t3, t4);
+       }
+       else
+       {
+          buildTheaterAssignPanel(gPane1, tf1, tf2, tf3, tf4);
+          bPane.setTop(gPane1);
+          bPane.setCenter(assignB);
        }
        
-       
-       
+       //Stage Set-up
        primaryStage.setTitle("Movie Theater Booking System");
        primaryStage.setScene(scene);
        primaryStage.show();
        primaryStage.sizeToScene();
        
        
-       
-       
        //Event Handler to Serialize Object Data before application closes
-       primaryStage.setOnCloseRequest((WindowEvent event) -> {
+       /*primaryStage.setOnCloseRequest((WindowEvent event) -> {
            try{
                FileOutputStream fileOut = new FileOutputStream("Objects.txt");
                ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -70,7 +86,36 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
            }
            
            System.out.print("Deserializing Data");
+       });*/
+       
+       assignB.setOnAction(new EventHandler<ActionEvent>() {
+           @Override
+           public void handle(ActionEvent event) {
+               Theater t1 = new Theater(tf1.getText());
+               Theater t2 = new Theater(tf1.getText());
+               Theater t3 = new Theater(tf1.getText());
+               Theater t4 = new Theater(tf1.getText());
+               
+               buildTheaterMainPanel(t1, t2, t3, t4);
+           }
        });
        
+    }
+    
+    public static void buildTheaterAssignPanel(GridPane gPane1, TextField tf1, TextField tf2, TextField tf3, TextField tf4){
+        //Building/Adding of actual JavaFX Elements 
+        gPane1.add(new Label("Enter film name for Theater #1"), 0, 0);
+        gPane1.add(tf1, 1, 0);
+        gPane1.add(new Label("Enter film name for Theater #2"), 0, 1);
+        gPane1.add(tf2, 1, 1);
+        gPane1.add(new Label("Enter film name for Theater #3"), 0, 2);
+        gPane1.add(tf3, 1, 2);
+        gPane1.add(new Label("Enter film name for Theater #4"), 0, 3);
+        gPane1.add(tf4, 1, 3);
+        gPane1.setAlignment(Pos.CENTER);
+    }
+    
+    public static void buildTheaterMainPanel(Theater t1, Theater t2, Theater t3, Theater t4){
+        
     }
 }
