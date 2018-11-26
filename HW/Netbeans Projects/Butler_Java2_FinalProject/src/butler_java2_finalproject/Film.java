@@ -1,8 +1,9 @@
 package butler_java2_finalproject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Film {
+public class Film implements Serializable{
     private String filmTime;
     private String filmName;
     Boolean[] seatArr;

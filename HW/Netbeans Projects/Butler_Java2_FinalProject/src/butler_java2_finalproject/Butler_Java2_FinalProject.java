@@ -3,12 +3,14 @@ package butler_java2_finalproject;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.io.*;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.WindowEvent;
 
@@ -17,62 +19,30 @@ import javafx.stage.WindowEvent;
  * @author tfran
  */
 public class Butler_Java2_FinalProject extends Application implements Serializable {
-    //Declare Theater Objects
-    private Theater t1 = null;
-    private Theater t2 = null;
-    private Theater t3 = null;
-    private Theater t4 = null;
-    
-   
     
     @Override
     public void start(Stage primaryStage) {
+       //Initialize Theater Array of Objects
+       Theater[] theaterArr = new Theater[4];
+       
+       Theater t1 = new Theater("Tarzan");
+       for(int i = 0; i < theaterArr.length; i++){
+           theaterArr[i] = null;
+       }
+
        //Initialize TextField Elements
        TextField tf1 = new TextField();
        TextField tf2 = new TextField();
        TextField tf3 = new TextField();
        TextField tf4 = new TextField();
        
-       //Initialize Button Object
-       Button assignB = new Button("Assign Films");
-       
        //Intialize Pane Elements
        BorderPane bPane = new BorderPane();
-       GridPane gPane1 = new GridPane();
-       GridPane gPane2 = new GridPane();
-       VBox vb1 = new VBox();
-       VBox vb2 = new VBox();
-       VBox vb3 = new VBox();
-       VBox vb4 = new VBox();
+       bPane.setPadding(new Insets(5, 5, 5, 5));
        
        Scene scene = new Scene(bPane, 350, 200);
        
-       //Check for Serialized Object Data, If Found Deserialize
-       if(new File("Objects.txt").isFile()){
-           try{
-               FileInputStream fileIn = new FileInputStream("Objects.txt");
-               ObjectInputStream in = new ObjectInputStream(fileIn);
-               t1 = (Theater) in.readObject();
-               t2 = (Theater) in.readObject();
-               t3 = (Theater) in.readObject();
-               t4 = (Theater) in.readObject();
-           }
-           catch (IOException i) {
-               System.out.println("Class Not Found");
-           }
-           catch (ClassNotFoundException e) {
-               System.out.println("Class Not Found");
-           }
-           System.out.println("Serializing Data.");
-           
-           buildTheaterMainPanel(gPane2, t1, t2, t3, t4, vb1, vb2, vb3, vb4, bPane);
-       }
-       else
-       {
-          buildTheaterAssignPanel(gPane1, tf1, tf2, tf3, tf4);
-          bPane.setTop(gPane1);
-          bPane.setCenter(assignB);
-       }
+       
        
        //Stage Set-up
        primaryStage.setTitle("Movie Theater Booking System");
@@ -80,39 +50,70 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
        primaryStage.show();
        primaryStage.sizeToScene();
        
-       
-       //Event Handler to Serialize Object Data before application closes
-       /*primaryStage.setOnCloseRequest((WindowEvent event) -> {
+       //Check for Serialized Object Data, If Found Deserialize
+       if(new File("Objects.txt").isFile()){
            try{
-               FileOutputStream fileOut = new FileOutputStream("Objects.txt");
-               ObjectOutputStream out = new ObjectOutputStream(fileOut);
-               out.writeObject(t1);
-               out.writeObject(t2);
-               out.writeObject(t3);
-               out.writeObject(t4);
+               FileInputStream fileIn = new FileInputStream("Objects.txt");
+               ObjectInputStream in = new ObjectInputStream(fileIn);
+               theaterArr[0] = (Theater) in.readObject();
+               theaterArr[1] = (Theater) in.readObject();
+               theaterArr[2] = (Theater) in.readObject();
+               theaterArr[3] = (Theater) in.readObject();
            }
-           catch(IOException i){
-               System.out.println("Objects not found!");
+           catch (IOException | ClassNotFoundException i) {
+               System.out.println("Class Not Found");
            }
            
-           System.out.print("Deserializing Data");
-       });*/
+           System.out.println("Serializing Data.");
+           buildTheaterMainPanel(theaterArr, bPane, primaryStage);
+       }
+       else
+       {
+          buildTheaterAssignPanel(tf1, tf2, tf3, tf4, bPane, primaryStage, theaterArr);
+       }
        
-       assignB.setOnAction(new EventHandler<ActionEvent>() {
+       //Event Handler to Serialize Object Data before application closes
+       primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
            @Override
-           public void handle(ActionEvent event) {
-               Theater t1 = new Theater(tf1.getText());
-               Theater t2 = new Theater(tf1.getText());
-               Theater t3 = new Theater(tf1.getText());
-               Theater t4 = new Theater(tf1.getText());
+           public void handle(WindowEvent event) {
+               try{
+                   FileOutputStream fileOut = new FileOutputStream("Objects.txt");
+                   ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                   out.writeObject(theaterArr[0]);
+                   out.writeObject(theaterArr[1]);
+                   out.writeObject(theaterArr[2]);
+                   out.writeObject(theaterArr[3]);
+                   
+               }
+               catch(IOException i){
+                   System.out.println("Objects not found!");
+               }
                
-               buildTheaterMainPanel(gPane2, t1, t2, t3, t4, vb1, vb2, vb3, vb4, bPane);
+               System.out.print("Deserializing Data");
            }
        });
        
     }
     
-    public static void buildTheaterAssignPanel(GridPane gPane1, TextField tf1, TextField tf2, TextField tf3, TextField tf4){
+    public static void buildTheaterAssignPanel(TextField tf1, TextField tf2, TextField tf3, TextField tf4, BorderPane bPane, Stage primaryStage, Theater[] theaterArr){
+        //Initialization of content objects
+        GridPane gPane1 = new GridPane();
+        Button assignB = new Button("Assign Films");
+        
+        //EventListener for Assign Button
+        assignB.setOnAction(new EventHandler<ActionEvent>() {
+           @Override
+           public void handle(ActionEvent event) {
+               theaterArr[0] = new Theater(tf1.getText());
+               theaterArr[1] = new Theater(tf2.getText());
+               theaterArr[2] = new Theater(tf3.getText());
+               theaterArr[3] = new Theater(tf4.getText());
+               
+               buildTheaterMainPanel(theaterArr, bPane, primaryStage);
+               primaryStage.sizeToScene();
+           }
+       });
+        
         //Building/Adding of actual JavaFX Elements 
         gPane1.add(new Label("Enter film name for Theater #1"), 0, 0);
         gPane1.add(tf1, 1, 0);
@@ -123,19 +124,70 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
         gPane1.add(new Label("Enter film name for Theater #4"), 0, 3);
         gPane1.add(tf4, 1, 3);
         gPane1.setAlignment(Pos.CENTER);
+        
+        //Set BorderPane Elements
+        bPane.setTop(gPane1);
+        bPane.setCenter(assignB);
     }
     
-    public static void buildTheaterMainPanel(GridPane gPane2, Theater t1, Theater t2, Theater t3, Theater t4, VBox vb1, VBox vb2, VBox vb3, VBox vb4, BorderPane bPane){
+    public static void buildTheaterMainPanel(Theater[] theaterArr, BorderPane bPane, Stage primaryStage){
+        //Initialization of Content Objects
+        GridPane gPane2 = new GridPane();
+        ImageView[] imv = new ImageView[4];
+        Label[] theaterLabel = new Label[4];
+        Label[] filmLabel = new Label[4];
+        VBox[] vba = new VBox[5];
+        Button[][] timeButton = new Button[4][3];
+        
+        //Assignment For Loops
+        for(int i = 0; i < imv.length; i++){
+            imv[i] = new ImageView();
+            imv[i].setImage(new Image("images/TheaterPicture.jpg"));
+            imv[i].setFitHeight(200);
+            imv[i].setFitWidth(125);
+        }
+        for(int i = 0; i < theaterLabel.length; i++){
+            theaterLabel[i] = new Label("Theater " + (i + 1)); 
+        }
+        for(int i = 0; i < vba.length; i++){
+            vba[i] = new VBox();
+            vba[i].setAlignment(Pos.CENTER);
+            vba[i].setSpacing(3);
+        }
+        for(int i = 0; i < filmLabel.length; i++){
+            filmLabel[i] = new Label(theaterArr[i].f[0].getFilmName());
+        }
+       
+        for(int i = 0; i < 4; i++){
+            for(int c = 0; c < 3; c++){
+                timeButton[i][c] = new Button(theaterArr[0].f[c].getFilmTime());
+                timeButton[i][c].setPrefSize(100, 20);
+            }
+        }
+        
         Button b1 = new Button("Current Status");
         Button b2 = new Button("Viewer Total");
+        b1.setPrefSize(100, 20);
+        b2.setPrefSize(100, 20);
+
+        vba[0].getChildren().addAll(b1, b2);
+        vba[1].getChildren().addAll(theaterLabel[0], imv[0], filmLabel[0], timeButton[0][0], timeButton[0][1], timeButton[0][2]);
+        vba[2].getChildren().addAll(theaterLabel[1], imv[1], filmLabel[1], timeButton[1][0], timeButton[1][1], timeButton[1][2]);
+        vba[3].getChildren().addAll(theaterLabel[2], imv[2], filmLabel[2], timeButton[2][0], timeButton[2][1], timeButton[2][2]);
+        vba[4].getChildren().addAll(theaterLabel[3], imv[3], filmLabel[3], timeButton[3][0], timeButton[3][1], timeButton[3][2]);
         
+        gPane2.add(vba[1], 0, 0);
+        gPane2.add(vba[2], 1, 0);
+        gPane2.add(vba[3], 2, 0);
+        gPane2.add(vba[4], 3, 0);
+        gPane2.setHgap(6);
+        gPane2.setPadding(new Insets(0, 0, 0, 5));
         
-        
-        vb1.getChildren().addAll(b1, b2);
-        
-        
-        bPane.setLeft(vb1);
+        bPane.setLeft(vba[0]);
         bPane.setTop(null);
-        bPane.setCenter(null);
+        bPane.setCenter(gPane2);
+
+        primaryStage.setMinWidth(650);
+        primaryStage.setMinHeight(375);
     }
 }
