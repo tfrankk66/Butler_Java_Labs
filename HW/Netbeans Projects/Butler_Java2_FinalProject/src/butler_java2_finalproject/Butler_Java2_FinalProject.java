@@ -26,9 +26,6 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
     
     @Override
     public void start(Stage primaryStage) {
-        
-       bh = new ButtonHand();
-
        //Initialize Theater Array of Objects
        Theater[] theaterArr = new Theater[4];
        
@@ -69,11 +66,11 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
            }
            
            System.out.println("Serializing Data.");
-           buildTheaterMainPanel(theaterArr, bPane, primaryStage, bh);
+           buildTheaterMainPanel(theaterArr, bPane, primaryStage);
        }
        else
        {
-          buildTheaterAssignPanel(tf1, tf2, tf3, tf4, bPane, primaryStage, theaterArr, bh);
+          buildTheaterAssignPanel(tf1, tf2, tf3, tf4, bPane, primaryStage, theaterArr);
        }
        
        
@@ -103,7 +100,7 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
        
     }
     
-    public static void buildTheaterAssignPanel(TextField tf1, TextField tf2, TextField tf3, TextField tf4, BorderPane bPane, Stage primaryStage, Theater[] theaterArr, ButtonHand bh){
+    public static void buildTheaterAssignPanel(TextField tf1, TextField tf2, TextField tf3, TextField tf4, BorderPane bPane, Stage primaryStage, Theater[] theaterArr){
         //Initialization of content objects
         GridPane gPane1 = new GridPane();
         Button assignB = new Button("Assign Films");
@@ -117,7 +114,7 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
                theaterArr[2] = new Theater(tf3.getText());
                theaterArr[3] = new Theater(tf4.getText());
                
-               buildTheaterMainPanel(theaterArr, bPane, primaryStage, bh);
+               buildTheaterMainPanel(theaterArr, bPane, primaryStage);
                primaryStage.sizeToScene();
            }
        });
@@ -138,7 +135,7 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
         bPane.setCenter(assignB);
     }
     
-    public static void buildTheaterMainPanel(Theater[] theaterArr, BorderPane bPane, Stage primaryStage, ButtonHand bh){
+    public static void buildTheaterMainPanel(Theater[] theaterArr, BorderPane bPane, Stage primaryStage){
         //Initialization of Content Objects
         GridPane gPane2 = new GridPane();
         int count1;
@@ -178,17 +175,17 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
                         switch(c){
                             case 0:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 0, 0, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 0, 0);
                                 });
                                 break;
                             case 1:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 0, 1, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 0, 1);
                                 });
                                 break;
                             case 2:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 0, 2, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 0, 2);
                                 });
                                 break;
                         }
@@ -196,17 +193,17 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
                         switch(c){
                             case 0:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 1, 0, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 1, 0);
                                 });
                                 break;
                             case 1:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 1, 1, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 1, 1);
                                 });
                                 break;
                             case 2:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 1, 2, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 1, 2);
                                 });
                                 break;
                         }
@@ -214,17 +211,17 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
                         switch(c){
                             case 0:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 2, 0, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 2, 0);
                                 });
                                 break;
                             case 1:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 2, 1, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 2, 1);
                                 });
                                 break;
                             case 2:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 2, 2, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 2, 2);
                                 });
                                 break;
                         }
@@ -232,17 +229,17 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
                         switch(c){
                             case 0:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 3, 0, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 3, 0);
                                 });
                                 break;
                             case 1:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 3, 1, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 3, 1);
                                 });
                                 break;
                             case 2:
                                 timeButton[i][c].setOnAction((ActionEvent event) -> {
-                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 3, 2, bh);
+                                    buildFilmRoomPanel(theaterArr, bPane, primaryStage, 3, 2);
                                 });
                                 break;
                         }
@@ -279,7 +276,7 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
     }
     
     
-    public static void buildFilmRoomPanel(Theater[] theaterArr, BorderPane bPane, Stage primaryStage, int a, int b, ButtonHand bh){
+    public static void buildFilmRoomPanel(Theater[] theaterArr, BorderPane bPane, Stage primaryStage, int a, int b){
         //Pane Assignments
         VBox vb1 = new VBox();
         vb1.setAlignment(Pos.CENTER);
@@ -288,14 +285,14 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
         //Previous Page Button Initialization
         Button back = new Button("Previous Page");
         back.setOnAction((ActionEvent event) -> {
-                buildTheaterMainPanel(theaterArr, bPane, primaryStage, bh);
+                buildTheaterMainPanel(theaterArr, bPane, primaryStage);
              });
         
         Button[] seat = new Button[50];
         
         //Purchase Button Initialization
         Button purchase = new Button("Purchase Tickets");
-        //purchase.setOnAction(new PurchaseHand(theaterArr, seat, a, b));
+        purchase.setOnAction(new PurchaseHand(theaterArr, seat, a, b));
         
         //Key Code Button Initialization
         Button bgrey = new Button();
@@ -330,20 +327,22 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
         
         
         
-        
-        
         TilePane tp1 = new TilePane();
         tp1.setMaxSize(300, 300);
         tp1.setAlignment(Pos.CENTER);
         tp1.setHgap(3);
         tp1.setVgap(3);
         
-        for(int i = 0; i < seat.length; i++){
+        
+        if(seat[1] == null){
+           for(int i = 0; i < seat.length; i++){
             seat[i] = new Button("" + (i + 1));
             seat[i].setMaxSize(50, 25);
             tp1.getChildren().add(seat[i]);
-            seat[i].setOnAction(bh);
+            seat[i].setOnAction(new ButtonHand(theaterArr, seat, a, b, i));
+            } 
         }
+        
         
         vb1.setSpacing(20);
         vb1.getChildren().addAll(tp1, purchase, back);
@@ -354,19 +353,6 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
         
 
     }
-    
-    public class ButtonHand implements EventHandler<ActionEvent>
-    {
-        Button seat;
-        
-        @Override
-        public void handle(ActionEvent event) {
-            seat = (Button) event.getSource();
-            seat.setStyle("-fx-background-color: yellow");
-        }
-        
-    }
-    
     
 }
 

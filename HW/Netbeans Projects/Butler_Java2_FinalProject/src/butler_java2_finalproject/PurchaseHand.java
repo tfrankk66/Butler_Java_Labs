@@ -19,9 +19,18 @@ public class PurchaseHand implements EventHandler<ActionEvent>
 
         @Override
         public void handle(ActionEvent event) {
-            for(int i = 0; i < theaterArr[0].f[0].seatArr.length; ){
-                //if(seat.)
+            for(int i = 0; i < seat.length; i++){
+                if(theaterArr[a].f[b].seatSel[i] == true){
+                   seat[i].setStyle("-fx-background-color: red");
+                   theaterArr[a].f[b].seatAvv[i] = false;
+                   seat[i].setDisable(true);
+                }
+            }
+            
+            for(int i = 0; i < seat.length; i++){
+                theaterArr[a].f[b].seatSel[i] = false;
             }
         }
+        
         
     }

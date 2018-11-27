@@ -1,17 +1,23 @@
 package butler_java2_finalproject;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Film implements Serializable{
     private String filmTime;
     private String filmName;
-    Boolean[] seatArr;
+    Boolean[] seatSel;
+    Boolean[] seatAvv;
 
     public Film(String a, String b) {
-        this.seatArr = new Boolean[50];
-        for(int i = 0; i < seatArr.length; i++){
-            seatArr[i] = false;
+        this.seatSel = new Boolean[50];
+        this.seatAvv = new Boolean[50];
+        
+        for(int i = 0; i < seatSel.length; i++){
+            seatSel[i] = false;
+        }
+        
+        for(int i = 0; i < seatAvv.length; i++){
+            seatAvv[i] = true;
         }
         this.filmName = a;
         this.filmTime = b;
