@@ -1,12 +1,14 @@
 package butler_java2_finalproject;
 
 import java.io.Serializable;
+import javafx.scene.control.Button;
 
 public class Film implements Serializable{
     private String filmTime;
     private String filmName;
     Boolean[] seatSel;
     Boolean[] seatAvv;
+    transient Button[] seatBt;
 
     public Film(String a, String b) {
         this.seatSel = new Boolean[50];

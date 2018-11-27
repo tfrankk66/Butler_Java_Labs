@@ -65,7 +65,7 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
                System.out.println("Class Not Found");
            }
            
-           System.out.println("Serializing Data.");
+           System.out.println("Deserializing Data.");
            buildTheaterMainPanel(theaterArr, bPane, primaryStage);
        }
        else
@@ -92,7 +92,7 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
                    System.out.println("Objects not found!");
                }
                
-               System.out.print("Deserializing Data");
+               System.out.print("Serializing Data");
            }
        });
        
@@ -273,6 +273,7 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
 
         primaryStage.setMinWidth(650);
         primaryStage.setMinHeight(375);
+        
     }
     
     
@@ -288,11 +289,10 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
                 buildTheaterMainPanel(theaterArr, bPane, primaryStage);
              });
         
-        Button[] seat = new Button[50];
         
         //Purchase Button Initialization
         Button purchase = new Button("Purchase Tickets");
-        purchase.setOnAction(new PurchaseHand(theaterArr, seat, a, b));
+        purchase.setOnAction(new PurchaseHand(theaterArr, a, b));
         
         //Key Code Button Initialization
         Button bgrey = new Button();
@@ -333,15 +333,23 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
         tp1.setHgap(3);
         tp1.setVgap(3);
         
-        
-        if(seat[1] == null){
-           for(int i = 0; i < seat.length; i++){
-            seat[i] = new Button("" + (i + 1));
-            seat[i].setMaxSize(50, 25);
-            tp1.getChildren().add(seat[i]);
-            seat[i].setOnAction(new ButtonHand(theaterArr, seat, a, b, i));
-            } 
+        theaterArr[a].f[b].seatBt = new Button[50];
+        for(int i = 0; i < theaterArr[a].f[b].seatBt.length; i++){
+            theaterArr[a].f[b].seatBt[i] = new Button("" + (i + 1));
+            theaterArr[a].f[b].seatBt[i].setMaxSize(50, 25);
+            theaterArr[a].f[b].seatBt[i].setOnAction(new ButtonHand(theaterArr, a, b, i));
         }
+
+            
+           
+        for(int i = 0; i < theaterArr[a].f[b].seatSel.length; i++){  
+            if(theaterArr[a].f[b].seatAvv[i] == false){
+                theaterArr[a].f[b].seatBt[i].setDisable(true);
+                theaterArr[a].f[b].seatBt[i].setStyle("-fx-background-color: red");
+            }
+            tp1.getChildren().add(theaterArr[a].f[b].seatBt[i]);
+        } 
+        
         
         
         vb1.setSpacing(20);

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 
 public class Theater implements Serializable{
-    final Film[] f;
+    Film[] f;
     
     
     private String name;
