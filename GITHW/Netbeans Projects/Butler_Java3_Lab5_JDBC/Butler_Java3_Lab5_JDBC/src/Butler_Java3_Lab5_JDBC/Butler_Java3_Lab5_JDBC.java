@@ -16,6 +16,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -26,7 +27,8 @@ import javafx.scene.layout.HBox;
 
 public class Butler_Java3_Lab5_JDBC extends Application {
 
-    private TextField tfTableName = new TextField();
+    //JAVAFX Elements
+    private ComboBox tfTableName = new ComboBox();
     private TextArea taResult = new TextArea();
     private Button btShowContents = new Button("Show Contents");
     private Label lblStatus = new Label();
@@ -38,6 +40,10 @@ public class Butler_Java3_Lab5_JDBC extends Application {
 
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) {
+        
+        //Initalization method for Database Connection
+        initializeDB();
+        
         HBox hBox = new HBox(5);
         hBox.getChildren().addAll(new Label("Table Name"), tfTableName,
                 btShowContents);
@@ -50,11 +56,10 @@ public class Butler_Java3_Lab5_JDBC extends Application {
 
         // Create a scene and place it in the stage
         Scene scene = new Scene(pane, 500, 200);
-        primaryStage.setTitle("Exercise32_05"); // Set the stage title
+        primaryStage.setTitle("Butler_Lab5_JDBC"); // Set the stage title
         primaryStage.setScene(scene); // Place the scene in the stage
         primaryStage.show(); // Display the stage  
 
-        initializeDB();
 
         btShowContents.setOnAction(e -> showContents());
     }
@@ -66,20 +71,32 @@ public class Butler_Java3_Lab5_JDBC extends Application {
             System.out.println("Driver loaded");
 
             // Establish a connection
-            Connection connection = DriverManager.getConnection("jdbc:ucanaccess://C:\\Downloads\\SampleAccessDatabases\\exampleMDB.accdb");
+            Connection connection = DriverManager.getConnection("jdbc:ucanaccess://C:\\data\\exampleMDB.accdb");
 //    ("jdbc:oracle:thin:@liang.armstrong.edu:1521:ora9i",
 //     "scott", "tiger");
             System.out.println("Database connected");
 
             // Create a statement
             stmt = connection.createStatement();
+            
+            //Create MetaData Object
+            dbMetaData = connection.getMetaData();
+            
+            //Create ResultSet Boject
+            rs1 = dbMetaData.getTables(null, null, null, null);
+            
+            //While loop to add table names to Combo Box
+            while (rs1.next()) {
+                tfTableName.getItems().add(rs1.getString(3));
+                tfTableName.setValue(rs1.getString(3));
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     private void showContents() {
-        String tableName = tfTableName.getText();
+        String tableName = tfTableName.getValue().toString();
 
         try {
             String queryString = "select * from " + tableName;
