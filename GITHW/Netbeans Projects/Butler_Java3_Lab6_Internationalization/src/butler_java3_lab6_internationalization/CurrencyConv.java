@@ -1,4 +1,4 @@
-package butler_java3_lab5_internationalization;
+package butler_java3_lab6_internationalization;
 
 import java.text.NumberFormat;
 import java.util.Locale;

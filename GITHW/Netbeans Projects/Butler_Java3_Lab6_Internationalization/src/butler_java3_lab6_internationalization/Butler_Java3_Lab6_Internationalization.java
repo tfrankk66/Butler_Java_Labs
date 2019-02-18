@@ -1,5 +1,5 @@
 
-package butler_java3_lab5_internationalization;
+package butler_java3_lab6_internationalization;
 
 import java.awt.event.ActionListener;
 import javafx.application.Application;
@@ -17,7 +17,7 @@ import java.text.*;
  *
  * @author tfran
  */
-public class Butler_Java3_Lab5_Internationalization extends Application {
+public class Butler_Java3_Lab6_Internationalization extends Application {
     
     @Override
     public void start(Stage primaryStage) {
