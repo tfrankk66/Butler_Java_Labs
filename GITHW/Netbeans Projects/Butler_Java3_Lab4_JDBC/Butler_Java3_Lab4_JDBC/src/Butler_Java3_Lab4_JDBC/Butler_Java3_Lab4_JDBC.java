@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Butler_Java3_Lab5_JDBC;
+package Butler_Java3_Lab4_JDBC;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -25,7 +25,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
-public class Butler_Java3_Lab5_JDBC extends Application {
+public class Butler_Java3_Lab4_JDBC extends Application {
 
     //JAVAFX Elements
     private ComboBox tfTableName = new ComboBox();
