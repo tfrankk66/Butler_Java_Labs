@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Butler_Java3_Lab5_Internationalization.jnlp">
+  <information>
+    <title>Butler_Java3_Lab5_Internationalization</title>
+    <vendor>tfran</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Butler_Java3_Lab5_Internationalization.jar" size="5193" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Butler_Java3_Lab5_Internationalization" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="butler_java3_lab5_internationalization.Butler_Java3_Lab5_Internationalization"  name="Butler_Java3_Lab5_Internationalization" />
+  <update check="always"/>
+</jnlp>
