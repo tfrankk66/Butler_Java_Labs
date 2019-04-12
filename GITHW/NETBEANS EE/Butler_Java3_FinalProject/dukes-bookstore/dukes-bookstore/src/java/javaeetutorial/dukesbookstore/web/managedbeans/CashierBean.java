@@ -39,7 +39,13 @@ public class CashierBean extends AbstractBean {
     
     
     private String name = null;
+    
     private double stateTaxOption;
+    private double subTot;
+    private double taxAmt;
+    private double shippingCharge;
+    private double grandTotal;
+    
     private String creditCardNumber = null;
     private Date shipDate;
     private String shippingOption = "2";
@@ -63,8 +69,6 @@ public class CashierBean extends AbstractBean {
     {
         return stateTaxRequestBean.getStateTaxes();
     }
-    
-    
     
     public void setName(String name) {
         this.name = name;
@@ -149,6 +153,50 @@ public class CashierBean extends AbstractBean {
     public void setStateTaxOption(double stateTaxOption) {
         this.stateTaxOption = stateTaxOption;
     }
+    
+    public double getSubTot() {
+        return subTot;
+    }
+
+    public void setSubTot(double subTot) {
+        this.subTot = subTot;
+    }
+
+    public double getTaxAmt() {
+        taxAmt = subTot * stateTaxOption;
+        
+        return taxAmt;
+    }
+    
+    public void setTaxAmt(double taxAmt) {
+        this.taxAmt = taxAmt;
+    }
+
+    public double getShippingCharge() {
+        int selection = Integer.parseInt(shippingOption);
+        
+        switch(selection){
+            
+            case 2:
+                
+        }
+        
+        return shippingCharge;
+    }
+
+    public void setShippingCharge(double shippingCharge) {
+        this.shippingCharge = shippingCharge;
+    }
+
+    public double getGrandTotal() {
+        grandTotal = subTot + taxAmt + shippingCharge;
+        
+        return grandTotal;
+    }
+
+    public void setGrandTotal(double grandTotal) {
+        this.grandTotal = grandTotal;
+    }
 
     public String submit() {
         // Calculate and save the ship date
@@ -173,6 +221,8 @@ public class CashierBean extends AbstractBean {
                 return "bookordererror";
             }
 
+            this.subTot = cart.getTotal();
+            
             cart.clear();
 
             return ("bookreceipt");
