@@ -9,8 +9,12 @@ package javaeetutorial.dukesbookstore.web.managedbeans;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import javaeetutorial.dukesbookstore.ejb.BookRequestBean;
+import javaeetutorial.dukesbookstore.ejb.StateTaxRequestBean;
+import javaeetutorial.dukesbookstore.entity.StateTax;
 import javaeetutorial.dukesbookstore.exception.OrderException;
+import javaeetutorial.dukesbookstore.exception.StateTaxesNotFoundException;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIOutput;
@@ -29,7 +33,13 @@ public class CashierBean extends AbstractBean {
     private static final long serialVersionUID = -9221440716172304017L;
     @EJB
     BookRequestBean bookRequestBean;
+    
+    @EJB
+    StateTaxRequestBean stateTaxRequestBean;
+    
+    
     private String name = null;
+    private double stateTaxOption;
     private String creditCardNumber = null;
     private Date shipDate;
     private String shippingOption = "2";
@@ -49,6 +59,13 @@ public class CashierBean extends AbstractBean {
         this.newsletters = new String[0];
     }
 
+    public List<StateTax> getStateTax() throws StateTaxesNotFoundException 
+    {
+        return stateTaxRequestBean.getStateTaxes();
+    }
+    
+    
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -123,6 +140,14 @@ public class CashierBean extends AbstractBean {
 
     public void setStringProperty(String stringProperty) {
         this.stringProperty = stringProperty;
+    }
+    
+    public double getStateTaxOption() {
+        return stateTaxOption;
+    }
+    
+    public void setStateTaxOption(double stateTaxOption) {
+        this.stateTaxOption = stateTaxOption;
     }
 
     public String submit() {
