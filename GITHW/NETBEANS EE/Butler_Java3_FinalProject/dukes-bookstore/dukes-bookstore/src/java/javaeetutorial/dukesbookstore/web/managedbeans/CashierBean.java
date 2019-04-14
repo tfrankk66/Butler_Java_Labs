@@ -176,12 +176,19 @@ public class CashierBean extends AbstractBean {
         int selection = Integer.parseInt(shippingOption);
         
         switch(selection){
-            
             case 2:
+                this.shippingCharge = 20;
+                return shippingCharge;
+            
+            case 5:
+                this.shippingCharge = 45;
+                return shippingCharge;
                 
+            default:
+                this.shippingCharge = 10;
+                return shippingCharge;      
         }
         
-        return shippingCharge;
     }
 
     public void setShippingCharge(double shippingCharge) {
@@ -200,7 +207,7 @@ public class CashierBean extends AbstractBean {
 
     public String submit() {
         // Calculate and save the ship date
-        int days = Integer.valueOf(shippingOption).intValue();
+        int days = Integer.parseInt(shippingOption);
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, days);
         setShipDate(cal.getTime());
@@ -225,7 +232,7 @@ public class CashierBean extends AbstractBean {
             
             cart.clear();
 
-            return ("bookreceipt");
+            return ("bookOrderTotal");
         }
     }
 }

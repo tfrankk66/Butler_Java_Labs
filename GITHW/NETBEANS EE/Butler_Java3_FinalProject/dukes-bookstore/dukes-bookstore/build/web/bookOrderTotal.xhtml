@@ -25,21 +25,40 @@ and open the template in the editor.
         </p>
         <p>
             <h:outputText value="#{bundle.Tax}"/>
-            <h:outputText value="#{cashierBean.subTot}">
+            <h:outputText value="#{cashierBean.taxAmt}">
                 <f:convertNumber pattern="$#.00" />
             </h:outputText>
         </p>
         <p>
             <h:outputText value="#{bundle.Shipping}"/>
-            <h:outputText value="#{cashierBean.subTot}">
+            <h:outputText value="#{cashierBean.shippingCharge}">
                 <f:convertNumber pattern="$#.00" />
             </h:outputText>
         </p>
         <p>
             <h:outputText value="#{bundle.GrandTotal}"/>
-            <h:outputText value="#{cashierBean.subTot}">
+            <h:outputText value="#{cashierBean.grandTotal}">
                 <f:convertNumber pattern="$#.00" />
             </h:outputText>
+        </p>
+        <p>
+            <h:outputText value="#{bundle.NewsletterThanks}" 
+                          rendered="#{!empty cashierBean.newsletters}"/>
+            <ul>
+                <ui:repeat value="#{cashierBean.newsletters}" var="nli">
+                    <li><h:outputText value="#{nli}" /></li>
+                </ui:repeat>
+            </ul>
+        </p>
+        <p>
+            <h:outputText value="#{bundle.DukeFanClubThanks}" 
+                          rendered="#{cashierBean.specialOffer.isSelected()}"/>
+        </p>
+        <p>
+            <h:form id="confirmOrder" >
+                <h:commandButton value="#{bundle.Submit}"
+                                 action="bookreceipt" />
+            </h:form>
         </p>
     </ui:define>
 </ui:composition>
