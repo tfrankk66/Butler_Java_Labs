@@ -40,7 +40,6 @@ public class Butler_Java2_FinalProject extends Application implements Serializab
        //Initialize Theater Array of Objects
        Theater[] theaterArr = new Theater[4];
        
-       Theater t1 = new Theater("Tarzan");
        for(int i = 0; i < theaterArr.length; i++){
            theaterArr[i] = null;
        }
